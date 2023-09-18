@@ -32,3 +32,11 @@ end
 def show_move_error
   puts "\e[31mSorry, that is an invalid move. Please, select a free slot.\e[0m"
 end
+
+def show_winner(name, symbol)
+  puts "Congratulations #{name} (#{symbol})! You are the winner!"
+end
+
+def show_no_winner
+    puts "Game Over! No winner."
+end

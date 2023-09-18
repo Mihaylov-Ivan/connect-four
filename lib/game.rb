@@ -45,14 +45,14 @@ class Game
     end
 
     def play_turns
-        current_player = player1
+        @current_player = player1
         until game_over do
             player_turn_prompt(current_player.name)
             move = validate_move(gets.chomp)
             board.update(move, current_player.symbol)
             board.show
-            # check_game_over
-            # switch_current_player
+            check_game_over
+            switch_current_player
         end
     end
 
@@ -61,8 +61,7 @@ class Game
 
         # binding.pry
         rows = board.length-1
-        rows.downto(1) do |row|
-            a=1
+        rows.downto(0) do |row|
             return [row, col] if board.board[row][col] == " "
         end
 
@@ -78,14 +77,15 @@ class Game
     end
 
     def switch_current_player
-        @current_player == @player1 ? @current_player = @player2 : @current_player = @player1
+        current_player == player1 ? @current_player = player2 : @current_player = player1
     end
 
     def check_game_over
-        if @board.check_winner
+        if board.check_winner
+            # binding.pry
             @game_over = true
-            return show_winner(@current_player.name, @current_player.symbol)
-        elsif @board.full?
+            return show_winner(current_player.name, current_player.symbol)
+        elsif board.full?
             @game_over = true
             show_no_winner
         end
