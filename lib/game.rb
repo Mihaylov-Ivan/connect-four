@@ -23,11 +23,6 @@ class Game
         # show_play_again
     end
 
-    def game_setup
-        @player1 = create_player(1)
-        @player2 = create_player(2, player1.symbol)
-    end
-
     def create_player(number, otherSymbol = nil)
         player_name_prompt(number)
         name = gets.chomp
@@ -42,18 +37,6 @@ class Game
 
         show_input_error
         get_symbol(name, otherSymbol)
-    end
-
-    def play_turns
-        @current_player = player1
-        until game_over do
-            player_turn_prompt(current_player.name)
-            move = validate_move(gets.chomp)
-            board.update(move, current_player.symbol)
-            board.show
-            check_game_over
-            switch_current_player
-        end
     end
 
     def validate_move(col)
@@ -74,8 +57,27 @@ class Game
         check_move_input(gets.chomp)
     end
 
+    private
+
+    def game_setup
+        @player1 = create_player(1)
+        @player2 = create_player(2, player1.symbol)
+    end
+
     def switch_current_player
         current_player == player1 ? @current_player = player2 : @current_player = player1
+    end
+
+    def play_turns
+        @current_player = player1
+        until game_over do
+            player_turn_prompt(current_player.name)
+            move = validate_move(gets.chomp)
+            board.update(move, current_player.symbol)
+            board.show
+            check_game_over
+            switch_current_player
+        end
     end
 
     def check_game_over
