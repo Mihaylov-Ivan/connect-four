@@ -20,7 +20,6 @@ class Game
         game_setup
         board.show
         play_turns
-        # show_play_again
     end
 
     def create_player(number, otherSymbol = nil)
