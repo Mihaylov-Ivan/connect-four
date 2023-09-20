@@ -4,10 +4,10 @@ class Board
 
     def initialize
         @board = [[" ", " ", " ", " ", " ", " ", " "],
-        # [" ", " ", " ", " ", " ", " ", " "],
-        # [" ", " ", " ", " ", " ", " ", " "],
-        # [" ", " ", " ", " ", " ", " ", " "],
-        # [" ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " "],
+        [" ", " ", " ", " ", " ", " ", " "],
         [" ", " ", " ", " ", " ", " ", " "]]
     end
 
@@ -16,19 +16,12 @@ class Board
 
         |#{board[0][0]}|#{board[0][1]}|#{board[0][2]}|#{board[0][3]}|#{board[0][4]}|#{board[0][5]}|#{board[0][6]}|
         |#{board[1][0]}|#{board[1][1]}|#{board[1][2]}|#{board[1][3]}|#{board[1][4]}|#{board[1][5]}|#{board[1][6]}|
+        |#{board[2][0]}|#{board[2][1]}|#{board[2][2]}|#{board[2][3]}|#{board[2][4]}|#{board[2][5]}|#{board[2][6]}|
+        |#{board[3][0]}|#{board[3][1]}|#{board[3][2]}|#{board[3][3]}|#{board[3][4]}|#{board[3][5]}|#{board[3][6]}|
+        |#{board[4][0]}|#{board[4][1]}|#{board[4][2]}|#{board[4][3]}|#{board[4][4]}|#{board[4][5]}|#{board[4][6]}|
+        |#{board[5][0]}|#{board[5][1]}|#{board[5][2]}|#{board[5][3]}|#{board[5][4]}|#{board[5][5]}|#{board[5][6]}|
 
         HEREDOC
-
-        # puts <<-HEREDOC
-
-        # |#{board[0][0]}|#{board[0][1]}|#{board[0][2]}|#{board[0][3]}|#{board[0][4]}|#{board[0][5]}|#{board[0][6]}|
-        # |#{board[1][0]}|#{board[1][1]}|#{board[1][2]}|#{board[1][3]}|#{board[1][4]}|#{board[1][5]}|#{board[1][6]}|
-        # |#{board[2][0]}|#{board[2][1]}|#{board[2][2]}|#{board[2][3]}|#{board[2][4]}|#{board[2][5]}|#{board[2][6]}|
-        # |#{board[3][0]}|#{board[3][1]}|#{board[3][2]}|#{board[3][3]}|#{board[3][4]}|#{board[3][5]}|#{board[3][6]}|
-        # |#{board[4][0]}|#{board[4][1]}|#{board[4][2]}|#{board[4][3]}|#{board[4][4]}|#{board[4][5]}|#{board[4][6]}|
-        # |#{board[5][0]}|#{board[5][1]}|#{board[5][2]}|#{board[5][3]}|#{board[5][4]}|#{board[5][5]}|#{board[5][6]}|
-
-        # HEREDOC
     end
 
     def update(move, symbol)
@@ -39,8 +32,12 @@ class Board
         board.length
     end
 
+    def check_available(move)
+        board[move[0]][move[1]] == " "
+    end
+
     def full?
-        not board.any? { |sub_array| sub_array.include?(" ") }
+        board.flatten.none? { |cell| cell == " " }
     end
 
     def check_winner

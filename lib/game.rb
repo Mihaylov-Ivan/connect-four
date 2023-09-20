@@ -58,11 +58,9 @@ class Game
 
     def validate_move(col)
         col = check_move_input(col).to_i-1
-
-        # binding.pry
         rows = board.length-1
         rows.downto(0) do |row|
-            return [row, col] if board.board[row][col] == " "
+            return [row, col] if board.check_available([row, col])
         end
 
         show_move_error
@@ -82,7 +80,6 @@ class Game
 
     def check_game_over
         if board.check_winner
-            # binding.pry
             @game_over = true
             return show_winner(current_player.name, current_player.symbol)
         elsif board.full?
